@@ -4,15 +4,14 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.send_composed_key_when_left_alt_is_pressed = true
+config.send_composed_key_when_right_alt_is_pressed = false
+
 -- This is where you actually apply your config choices
 
--- For example, changing the color scheme:
--- config.color_scheme = "Darcula (base16)"
 config.color_scheme = 'Catppuccin Frappe'
--- config.color_scheme = 'Catppuccin Frappé (Gogh)'
--- config.color_scheme = 'Catppuccin Macchiato'
--- config.color_scheme = 'CGA'
--- config.color_scheme = 'GitHub Dark'
+-- config.window_decorations = "RESIZE"
+-- config.window_background_opacity = 0.99
 
 config.font = wezterm.font("Hack Nerd Font")
 
