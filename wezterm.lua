@@ -9,11 +9,38 @@ config.send_composed_key_when_right_alt_is_pressed = false
 
 -- This is where you actually apply your config choices
 
-config.color_scheme = 'Catppuccin Frappe'
--- config.window_decorations = "RESIZE"
--- config.window_background_opacity = 0.99
+local scheme = "Catppuccin Frappe"
 
-config.font = wezterm.font("Hack Nerd Font")
+config.color_scheme = scheme
+
+config.font = wezterm.font("Hack Nerd Font Mono")
+
+local act = wezterm.action
+
+config.keys = {
+	{
+		key = ",",
+		mods = "CMD",
+		action = act.SpawnCommandInNewTab({
+			cwd = os.getenv("WEZTERM_CONFIG_DIR"),
+			set_environment_variables = {
+				TERM = "screen-256color",
+			},
+			args = {
+				"/opt/homebrew/bin/nvim",
+				os.getenv("WEZTERM_CONFIG_FILE"),
+			},
+		}),
+	},
+	{ key = "t", mods = "CMD|SHIFT", action = act.ShowTabNavigator },
+	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "D", mods = "CMD", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "x", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
+	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
+	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
+	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
+}
 
 config.font_size = 14.0
 -- and finally, return the configuration to wezterm
@@ -43,5 +70,15 @@ config.background = {
 		hsb = dimmer,
 	},
 }
+
+config.hide_tab_bar_if_only_one_tab = true
+config.use_fancy_tab_bar = false
+
+local mux = wezterm.mux
+
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 return config
