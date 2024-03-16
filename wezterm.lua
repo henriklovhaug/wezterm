@@ -15,6 +15,12 @@ config.color_scheme = scheme
 
 config.font = wezterm.font("Hack Nerd Font Mono")
 
+config.font_size = 14.0
+
+config.native_macos_fullscreen_mode = true
+
+config.audible_bell = "Disabled"
+
 local act = wezterm.action
 
 config.keys = {
@@ -36,13 +42,14 @@ config.keys = {
 	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "D", mods = "CMD", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "x", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
 	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
 	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
 	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
+	{ key = "m", mods = "CMD", action = act.TogglePaneZoomState },
+	{ key = "p", mods = "CMD", action = act.PaneSelect },
 }
-
-config.font_size = 14.0
 -- and finally, return the configuration to wezterm
 
 -- The art is a bit too bright and colorful to be useful as a backdrop
@@ -73,12 +80,5 @@ config.background = {
 
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
-
-local mux = wezterm.mux
-
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
-end)
 
 return config
