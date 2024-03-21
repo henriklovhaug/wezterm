@@ -17,8 +17,6 @@ config.font = wezterm.font("Hack Nerd Font Mono")
 
 config.font_size = 14.0
 
-config.native_macos_fullscreen_mode = true
-
 config.audible_bell = "Disabled"
 
 local act = wezterm.action
@@ -42,7 +40,7 @@ config.keys = {
 	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "D", mods = "CMD", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "x", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
-	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
 	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
@@ -80,5 +78,14 @@ config.background = {
 
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
+
+local mux = wezterm.mux
+
+wezterm.on("gui-startup", function()
+	local _, _, window = mux.spawn_window({})
+	window:gui_window():maximize()
+end)
+
+config.native_macos_fullscreen_mode = true
 
 return config
