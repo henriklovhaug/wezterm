@@ -46,6 +46,7 @@ config.keys = {
 	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
 	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
 	{ key = "m", mods = "CMD", action = act.TogglePaneZoomState },
+	{ key = "a", mods = "CMD", action = act.TogglePaneZoomState },
 	{ key = "p", mods = "CMD", action = act.PaneSelect },
 }
 -- and finally, return the configuration to wezterm
