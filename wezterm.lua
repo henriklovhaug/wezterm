@@ -9,7 +9,8 @@ config.send_composed_key_when_right_alt_is_pressed = false
 
 -- This is where you actually apply your config choices
 
-local scheme = "Catppuccin Frappe"
+-- local scheme = "Catppuccin Frappe"
+local scheme = "Catppuccin Mocha"
 
 config.color_scheme = scheme
 
@@ -45,9 +46,9 @@ config.keys = {
 	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
 	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
-	{ key = "m", mods = "CMD", action = act.TogglePaneZoomState },
+	{ key = "ø", mods = "CMD", action = act.TogglePaneZoomState },
 	{ key = "a", mods = "CMD", action = act.TogglePaneZoomState },
-	{ key = "p", mods = "CMD", action = act.PaneSelect },
+	{ key = "s", mods = "CMD", action = act.PaneSelect },
 }
 -- and finally, return the configuration to wezterm
 
